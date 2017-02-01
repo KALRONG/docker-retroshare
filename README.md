@@ -2,6 +2,8 @@
 
 This image provides a fully working Retroshare installation that can be executed in three different modes as needed.
 
+This image is intended for those who don't want to install all the dependencies or have issue like the current one with libcrypto versions causing segfaults.
+
 ##Important considerations:
 
 For Retroshare to work propertly you may need to map more ports than the ones expecified here, this instructions are just a guide of how to execute and connect to the application.
