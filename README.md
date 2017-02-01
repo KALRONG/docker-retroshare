@@ -1,15 +1,12 @@
 #Retroshare for Docker
-#=====================
 
 This image provides a fully working Retroshare installation that can be executed in three different modes as needed.
 
-Important considerations:
--------------------------
+##Important considerations:
 
 For Retroshare to work propertly you may need to map more ports than the ones expecified here, this instructions are just a guide of how to execute and connect to the application.
 
 ##Usage:
-##-----
 
 This image can run in three different modes:
 
@@ -52,6 +49,5 @@ xpra attach tcp:<localhost or container ip>:10000
 In this case, if you close the interface it will also close the container.
 
 ##Updates:
-##-------
 
 I will try to keep the build as updated as possible, if you want me to update it sooner just open an issue on the github repository and I will run the build asap.
