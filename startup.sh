@@ -10,7 +10,7 @@ if [ $? -ne 0 ]; then
     chown -R retrouser:retrouser /home/retrouser
     chmod -R ug+rwX /home/retrouser
     chmod -R o-rwx /home/retrouser
-    su - retrouser -c "ssh-keygen -t rsa -f rs_ssh_host_rsa_key"
+    #su - retrouser -c "ssh-keygen -t rsa -f rs_ssh_host_rsa_key"
 fi
 
 if [[ $MODE == "nogui" ]]
