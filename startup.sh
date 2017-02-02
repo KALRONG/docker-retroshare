@@ -13,6 +13,16 @@ if [ $? -ne 0 ]; then
     #su - retrouser -c "ssh-keygen -t rsa -f rs_ssh_host_rsa_key"
 fi
 
+if [[ $TOR == "yes" ]]
+then
+	/etc/init.d/tor start
+fi
+
+if [[ $I2P == "yes" ]]
+then
+	i2prouter-nowrapper
+fi
+
 if [[ $MODE == "nogui" ]]
 then
 	su - retrouser -c "RetroShare06-nogui"
