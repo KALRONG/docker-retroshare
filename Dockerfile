@@ -1,4 +1,4 @@
-FROM debian:jessie-backports
+FROM debian:stretch-slim
 MAINTAINER KALRONG <xrb@kalrong.net>
 
 ENV MODE nogui-web
@@ -7,7 +7,7 @@ ENV TOR no
 ENV I2P no
 ENV I2P_DIR /usr/share/i2p
 
-RUN echo "deb http://deb.i2p2.no/ jessie main" > /etc/apt/sources.list.d/i2p.list && \
+RUN echo "deb http://deb.i2p2.no/ stretch main" > /etc/apt/sources.list.d/i2p.list && \
     apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-key 0x67ECE5605BCF1346
 
 RUN apt-get update;apt-get -y upgrade; apt-get -y dist-upgrade
@@ -21,10 +21,6 @@ RUN apt-get install -y libglib2.0-dev libupnp-dev qt4-dev-tools \
 RUN mkdir ~/retroshare &&\
     cd ~/retroshare &&\
     git clone https://github.com/RetroShare/RetroShare.git trunk
-
-RUN cd ~/retroshare/trunk &&\
-    qmake CONFIG+=debug &&\
-    make
 
 RUN cd ~/retroshare/trunk &&\
     qmake CONFIG+=tests &&\
