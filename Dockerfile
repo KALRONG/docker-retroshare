@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:jessie-backports
 MAINTAINER KALRONG <xrb@kalrong.net>
 
 ENV MODE nogui-web
@@ -10,13 +10,14 @@ ENV I2P_DIR /usr/share/i2p
 RUN apt-get update;apt-get -y upgrade; apt-get -y dist-upgrade
 RUN apt-get install -y gnupg2
 
-RUN echo "deb http://deb.i2p2.no/ stretch main" > /etc/apt/sources.list.d/i2p.list && \
-    apt-key adv --keyserver hkp://pool.sks-keyservers.net --recv-key 0x67ECE5605BCF1346
+RUN echo "deb http://deb.i2p2.no/ jessie main" > /etc/apt/sources.list.d/i2p.list
+
+RUN apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 0x67ECE5605BCF1346
 
 
 RUN apt-get update; apt-get install -y libglib2.0-dev libupnp-dev qt4-dev-tools \
     libqt4-dev libssl-dev libxss-dev libgnome-keyring-dev libbz2-dev \
-    libqt4-opengl-dev libqtmultimediakit1 qtmobility-dev libsqlcipher-dev \
+    libqt4-opengl-dev libsqlcipher-dev libqtmultimediakit1 qtmobility-dev \
     libspeex-dev libspeexdsp-dev libxslt1-dev libcurl4-openssl-dev \
     libopencv-dev tcl8.5 libmicrohttpd-dev git xpra tor i2p-router i2p-keyring
 
