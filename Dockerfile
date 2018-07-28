@@ -1,4 +1,4 @@
-FROM debian:jessie-backports
+FROM debian:stretch-slim
 MAINTAINER KALRONG <xrb@kalrong.net>
 
 ENV MODE nogui-web
@@ -7,33 +7,22 @@ ENV TOR no
 ENV I2P no
 ENV I2P_DIR /usr/share/i2p
 
-RUN apt-get update;apt-get -y upgrade; apt-get -y dist-upgrade
-RUN apt-get install -y gnupg2
+RUN apt-get update && apt-get -y install wget gnupg2 curl
 
-RUN echo "deb http://deb.i2p2.no/ jessie main" > /etc/apt/sources.list.d/i2p.list
+RUN echo 'deb http://download.opensuse.org/repositories/network:/retroshare/Debian_9.0/ /' >> /etc/apt/sources.list.d/retroshare.list
 
-RUN apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 0x67ECE5605BCF1346
+RUN wget -qO - http://download.opensuse.org/repositories/network:retroshare/Debian_9.0/Release.key | apt-key add - 
 
+RUN echo "deb http://deb.i2p2.no/ stretch main" > /etc/apt/sources.list.d/i2p.list
 
-RUN apt-get update; apt-get install -y libglib2.0-dev libupnp-dev qt4-dev-tools \
-    libqt4-dev libssl-dev libxss-dev libgnome-keyring-dev libbz2-dev \
-    libqt4-opengl-dev libsqlcipher-dev libqtmultimediakit1 qtmobility-dev \
-    libspeex-dev libspeexdsp-dev libxslt1-dev libcurl4-openssl-dev \
-    libopencv-dev tcl8.5 libmicrohttpd-dev git xpra tor i2p-router i2p-keyring
+RUN curl -o i2p-debian-repo.key.asc https://geti2p.net/_static/i2p-debian-repo.key.asc && apt-key add i2p-debian-repo.key.asc
 
-RUN mkdir ~/retroshare &&\
-    cd ~/retroshare &&\
-    git clone https://github.com/RetroShare/RetroShare.git trunk
+RUN mkdir -p /usr/share/man/man1 && \
+    (echo "deb http://http.debian.net/debian stretch-backports main" > /etc/apt/sources.list.d/backports.list) && \
+    apt-get update -y && \
+    apt-get install -t stretch-backports openjdk-8-jdk -y
 
-RUN cd ~/retroshare/trunk &&\
-    qmake CONFIG+=tests &&\
-    make
-
-RUN cd ~/retroshare/trunk/tests/unittests/ &&\
-    ./run_tests.sh
-
-RUN cd ~/retroshare/trunk &&\
-    make install
+RUN apt-get update && apt-get -y install retroshare xpra i2p tor
 
 RUN sed -i 's/127\.0\.0\.1/0.0.0.0/g' ${I2P_DIR}/i2ptunnel.config && \
     sed -i 's/::1,127\.0\.0\.1/0.0.0.0/g' ${I2P_DIR}/clients.config && \
@@ -42,7 +31,7 @@ RUN sed -i 's/127\.0\.0\.1/0.0.0.0/g' ${I2P_DIR}/i2ptunnel.config && \
     printf "i2np.udp.ipv6=false\ni2np.upnp.enable=false\n" >> ${I2P_DIR}/router.config && \
     echo "RUN_AS_USER=i2psvc" >> /etc/default/i2p
 
-RUN apt-get clean all
+RUN apt-get -y remove curl wget && apt-get clean all
 
 COPY ./startup.sh /startup.sh
 
