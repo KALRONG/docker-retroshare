@@ -12,9 +12,9 @@ RUN wget -O "/usr/share/keyrings/xpra.asc" https://xpra.org/xpra.asc
 RUN cd /etc/apt/sources.list.d ; wget $REPOFILE
 
 RUN wget -qO - http://download.opensuse.org/repositories/network:retroshare/Debian_${DEBIAN_VERSION}/Release.key | apt-key add -
-RUN /bin/bash -c "echo 'deb http://download.opensuse.org/repositories/network:/retroshare/Debian_${DEBIAN_VERSION}/' > /etc/apt/sources.list.d/retroshare.list"
+RUN /bin/bash -c "echo 'deb http://download.opensuse.org/repositories/network:/retroshare/Debian_${DEBIAN_VERSION}/ /' > /etc/apt/sources.list.d/retroshare.list"
 
-RUN apt -y install xpra retroshare-gui
+RUN apt -y install xpra retroshare-gui-unstable
 
 RUN apt -y remove wget
 
