@@ -50,7 +50,7 @@ xpra attach tcp:<localhost or container ip>:10000
 
 In this case, if you close the interface it will also close the container.
 
-I2P and TOR support:
+I2P and TOR support [Temporaly disabled]:
 -
 
 This image comes with i2p and tor preinstalled but disabled by default, to enable them you should set the variables I2P and TOR to yes as follows:
