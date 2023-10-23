@@ -12,9 +12,9 @@ Usage:
 -
 This image can run in three different modes:
 
-* nogui: Will run just Retroshare in nogui mode.
-* nogui-web: Will run Retroshare in nogui mode with web interface enabled on port 9090. Default.
-* gui: Will run Retroshare in gui mode using xpra to map the user interface to the port 10000.
+* nogui: Will run just Retroshare in nogui mode. [Not tested]
+* nogui-web: Will run Retroshare in nogui mode with web interface enabled on port 9090. Default. [Not tested]
+* gui: Will run Retroshare in gui mode using xpra to map the user interface to the port 14500.
 
 This mode should be specified when creating the container using the env variable MODE.
 
@@ -37,7 +37,7 @@ This will make the container run in the background and you will be able to acces
 gui
 -
 ```
-docker run -d --env="MODE=gui" [-p 10000:10000] kalrong/docker-retroshare
+docker run -d --env="MODE=gui" [-p 14500:14500] kalrong/docker-retroshare
 ```
 
 This will make the container run in the background and the gui will be handled by xpra in the port 10000 o the container or, if you pass the optional option above mentioned, on the localhost port 10000-
