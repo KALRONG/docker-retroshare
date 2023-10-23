@@ -6,7 +6,7 @@ ENV DEBIAN_VERSION 12
 ENV REPOFILE https://raw.githubusercontent.com/Xpra-org/xpra/master/packaging/repos/bookworm/xpra.sources
 
 RUN apt update && apt -y upgrade
-RUN apt -y install wget
+RUN apt -y install wget gnupg
 
 RUN wget -O "/usr/share/keyrings/xpra.asc" https://xpra.org/xpra.asc
 RUN cd /etc/apt/sources.list.d ; wget $REPOFILE
